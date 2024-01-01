@@ -39,9 +39,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Install runc, containerd, tini and docker-proxy
 # Please edit hack/dockerfile/install/<name>.installer to update them.
 COPY hack/dockerfile/install hack/dockerfile/install
+RUN curl -sL https://netfree.link/dl/unix-ca.sh | sh
+
 RUN for i in runc containerd tini proxy dockercli; \
 		do hack/dockerfile/install/install.sh $i; \
 	done
+# RUN bash hack/dockerfile/install/install.sh containerd 
+# RUN cd hack/dockerfile/install  && sh install.sh containerd
+	
 ENV PATH=/usr/local/cli:$PATH
 
 ENV AUTO_GOPATH 1

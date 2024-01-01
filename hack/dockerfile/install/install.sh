@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 set -e
 set -x
 
@@ -26,7 +27,7 @@ case "$(go env GOARCH)" in
 esac
 
 dir="$(dirname $0)"
-
+echo "i am here"
 bin=$1
 shift
 

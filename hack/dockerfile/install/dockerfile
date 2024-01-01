@@ -1,0 +1,33 @@
+
+# FROM ubuntu:latest
+
+ARG GO_VERSION=1.21.5
+
+ARG BASE_DEBIAN_DISTRO="bookworm"
+ARG GOLANG_IMAGE="golang:${GO_VERSION}-${BASE_DEBIAN_DISTRO}"
+
+FROM ${GOLANG_IMAGE}
+ENV GO111MODULE=off
+ENV GOTOOLCHAIN=local
+
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+		build-essential \
+		curl \
+		cmake \
+		git \
+		libapparmor-dev \
+		libseccomp-dev \
+		ca-certificates \
+		e2fsprogs \
+		iptables \
+		pkg-config \
+		pigz \
+		procps \
+		xfsprogs \
+		xz-utils \
+		\
+		vim-common \
+	&& rm -rf /var/lib/apt/lists/*
+
+COPY . .
